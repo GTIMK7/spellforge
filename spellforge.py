@@ -30,89 +30,168 @@ st.set_page_config(
 )
 
 # ==============================================================================
-# WORD BANK
-# Three categories × three difficulty tiers.
-# Each word: syllables, hint (meaning), mnemonic (memory trick), common_error.
+# TAGS
+# A word can carry more than one tag (e.g. "privilege" is both professional and
+# cyber) — tags are metadata for filtering, not exclusive folders.
 # ==============================================================================
 
-WORD_BANK = {
-    "everyday": {
-        "easy": [
-            {"word": "friend", "syllables": ["friend"], "hint": "someone you know and like", "mnemonic": "Fri + END — your week ENDs with a friend", "common_error": "freind"},
-            {"word": "because", "syllables": ["be", "cause"], "hint": "it tells you why", "mnemonic": "Big Elephants Can Always Understand Small Elephants", "common_error": "becuase"},
-            {"word": "weird", "syllables": ["weird"], "hint": "strange, unusual", "mnemonic": "weird breaks the i-before-e rule — WE are weird together", "common_error": "wierd"},
-            {"word": "believe", "syllables": ["be", "lieve"], "hint": "to think something is true", "mnemonic": "there's a LIE in beLIEve", "common_error": "belive"},
-            {"word": "receive", "syllables": ["re", "ceive"], "hint": "to get something", "mnemonic": "i before e EXCEPT after c — reCEIVE", "common_error": "recieve"},
-            {"word": "tomorrow", "syllables": ["to", "mor", "row"], "hint": "the day after today", "mnemonic": "two R's in TOMORROW — like two sunrises", "common_error": "tommorow"},
-            {"word": "until", "syllables": ["un", "til"], "hint": "up to the time that", "mnemonic": "only ONE L — un + til", "common_error": "untill"},
-            {"word": "beginning", "syllables": ["be", "gin", "ning"], "hint": "the start", "mnemonic": "double the N when you add -ING to beGIN", "common_error": "begining"},
-        ],
-        "medium": [
-            {"word": "definitely", "syllables": ["def", "i", "nite", "ly"], "hint": "for sure, 100%", "mnemonic": "defiNITEly has NITE in it — not defin-ATE-ly", "common_error": "definately"},
-            {"word": "separate", "syllables": ["sep", "a", "rate"], "hint": "to pull apart, divided", "mnemonic": "there's A RAT in sepARATe", "common_error": "seperate"},
-            {"word": "embarrassed", "syllables": ["em", "bar", "rassed"], "hint": "feeling awkward or ashamed", "mnemonic": "two R's, two S's — Really Red, Super Shy", "common_error": "embarassed"},
-            {"word": "necessary", "syllables": ["nec", "es", "sar", "y"], "hint": "needed, required", "mnemonic": "one Collar, two Socks (1 C, 2 S's)", "common_error": "neccessary"},
-            {"word": "achievement", "syllables": ["a", "chieve", "ment"], "hint": "a success or accomplishment", "mnemonic": "i before e — aCHIEVE", "common_error": "acheivement"},
-            {"word": "argument", "syllables": ["ar", "gu", "ment"], "hint": "a disagreement or debate", "mnemonic": "I lost an E in the argument", "common_error": "arguement"},
-            {"word": "existence", "syllables": ["ex", "is", "tence"], "hint": "the state of being", "mnemonic": "ends in -ENCE not -ANCE", "common_error": "existance"},
-            {"word": "occasion", "syllables": ["oc", "ca", "sion"], "hint": "a special event or time", "mnemonic": "two C's, one S — an ocCASion is a BIG deal", "common_error": "ocassion"},
-        ],
-        "hard": [
-            {"word": "rhythm", "syllables": ["rhy", "thm"], "hint": "a regular beat or pattern", "mnemonic": "Rhythm Helps Your Two Hips Move — Y is the only vowel", "common_error": "rythm"},
-            {"word": "conscience", "syllables": ["con", "science"], "hint": "your inner moral sense", "mnemonic": "con + SCIENCE — the science of right and wrong", "common_error": "conscence"},
-            {"word": "acquiesce", "syllables": ["ac", "qui", "esce"], "hint": "to reluctantly agree", "mnemonic": "AC + QUI + ESCE — the CQ together is rare", "common_error": "aquiesce"},
-            {"word": "chrysanthemum", "syllables": ["chry", "san", "the", "mum"], "hint": "a type of flower", "mnemonic": "CHRY + SAN + THE + MUM — Greek roots: gold flower", "common_error": "chrysantemum"},
-            {"word": "onomatopoeia", "syllables": ["on", "o", "ma", "to", "poe", "ia"], "hint": "words that sound like what they mean (buzz, hiss)", "mnemonic": "Old Nuns On Mopeds Are Tall, Often Pregnant, Often Eating Ice-cream Alone", "common_error": "onomatopeia"},
-            {"word": "supersede", "syllables": ["su", "per", "sede"], "hint": "to replace or take the place of", "mnemonic": "the only -SEDE word in English — all others use -CEDE or -CEED", "common_error": "supercede"},
-        ],
-    },
-    "professional": {
-        "easy": [
-            {"word": "business", "syllables": ["busi", "ness"], "hint": "a commercial activity or company", "mnemonic": "busi + NESS — full of BUSY-ness", "common_error": "buisness"},
-            {"word": "schedule", "syllables": ["sched", "ule"], "hint": "a plan of timed events", "mnemonic": "SCH at the start — like SCHool", "common_error": "schedual"},
-            {"word": "career", "syllables": ["ca", "reer"], "hint": "a long-term profession", "mnemonic": "two R's, two E's — a long road", "common_error": "carreer"},
-            {"word": "colleague", "syllables": ["col", "league"], "hint": "a work partner", "mnemonic": "col + LEAGUE — you're in the same league", "common_error": "collegue"},
-            {"word": "benefit", "syllables": ["ben", "e", "fit"], "hint": "a helpful perk or advantage", "mnemonic": "one N, one F — a slim benefit", "common_error": "benifit"},
-        ],
-        "medium": [
-            {"word": "accommodate", "syllables": ["ac", "com", "mo", "date"], "hint": "to make room for", "mnemonic": "two C's AND two M's — room for everyone", "common_error": "accomodate"},
-            {"word": "maintenance", "syllables": ["main", "ten", "ance"], "hint": "keeping things running", "mnemonic": "mainTENance has TEN in it, not TAIN", "common_error": "maintainance"},
-            {"word": "questionnaire", "syllables": ["ques", "tion", "naire"], "hint": "a survey", "mnemonic": "double N before AIRE — French import", "common_error": "questionaire"},
-            {"word": "occurrence", "syllables": ["oc", "cur", "rence"], "hint": "something that happens", "mnemonic": "two C's, two R's — it occurred twice", "common_error": "occurence"},
-            {"word": "liaison", "syllables": ["li", "ai", "son"], "hint": "a person who connects two groups", "mnemonic": "LI-AI-SON — three vowel clusters in a row", "common_error": "liason"},
-            {"word": "privilege", "syllables": ["priv", "i", "lege"], "hint": "a special right or advantage", "mnemonic": "priv + i + LEGE — no D anywhere", "common_error": "priviledge"},
-            {"word": "recommend", "syllables": ["rec", "om", "mend"], "hint": "to suggest as good", "mnemonic": "one C, two M's — I reComMend", "common_error": "reccomend"},
-        ],
-        "hard": [
-            {"word": "bureaucracy", "syllables": ["bu", "reau", "cra", "cy"], "hint": "government or corporate red tape", "mnemonic": "BU-REAU (French) + CRACY — rule by desks", "common_error": "beaurocracy"},
-            {"word": "entrepreneur", "syllables": ["en", "tre", "pre", "neur"], "hint": "someone who starts a business", "mnemonic": "French word — ends in NEUR not NUER", "common_error": "entreprenuer"},
-            {"word": "consensus", "syllables": ["con", "sen", "sus"], "hint": "general agreement among a group", "mnemonic": "CON + SENSUS — common sense", "common_error": "concensus"},
-            {"word": "conscientious", "syllables": ["con", "scien", "tious"], "hint": "careful and diligent", "mnemonic": "CON + SCIENCE + TIOUS — guided by conscience", "common_error": "conscientous"},
-            {"word": "itinerary", "syllables": ["i", "tin", "er", "ar", "y"], "hint": "a travel plan", "mnemonic": "I + TIN + ER + ARY — five parts, like five stops", "common_error": "itenerary"},
-        ],
-    },
-    "trending": {
-        "easy": [
-            {"word": "rizz", "syllables": ["rizz"], "hint": "charisma, flirting skill (2024+ slang)", "mnemonic": "cha-RIZZ-ma, two Z's", "common_error": "riz"},
-            {"word": "cringe", "syllables": ["cringe"], "hint": "secondhand embarrassment", "mnemonic": "crin + GE — G sounds like J here", "common_error": "crindge"},
-            {"word": "vibe", "syllables": ["vibe"], "hint": "an atmosphere or feeling", "mnemonic": "V-I-B-E — four letters, one vibe", "common_error": "viebe"},
-            {"word": "slay", "syllables": ["slay"], "hint": "to do something exceptionally well", "mnemonic": "S-L-A-Y — four letters, total win", "common_error": "slae"},
-        ],
-        "medium": [
-            {"word": "aesthetic", "syllables": ["aes", "thet", "ic"], "hint": "a visual style or vibe", "mnemonic": "starts with AE — Artistic Energy", "common_error": "asthetic"},
-            {"word": "delulu", "syllables": ["de", "lu", "lu"], "hint": "playfully delusional (social media)", "mnemonic": "de + LU + LU, LU twice like seeing double", "common_error": "delooloo"},
-            {"word": "brainrot", "syllables": ["brain", "rot"], "hint": "the feeling after too much scrolling", "mnemonic": "BRAIN + ROT, one word", "common_error": "brain-rot"},
-            {"word": "crashout", "syllables": ["crash", "out"], "hint": "a dramatic meltdown", "mnemonic": "CRASH + OUT, one word", "common_error": "crash-out"},
-            {"word": "synergize", "syllables": ["syn", "er", "gize"], "hint": "corporate: combine forces", "mnemonic": "syn (together) + ergy + ize", "common_error": "synergyze"},
-            {"word": "leverage", "syllables": ["lev", "er", "age"], "hint": "to use as an advantage", "mnemonic": "LEVER + AGE — use the lever", "common_error": "leverege"},
-        ],
-        "hard": [
-            {"word": "millennial", "syllables": ["mil", "len", "ni", "al"], "hint": "generation born ~1981–1996", "mnemonic": "two L's, two N's — millennium = 1000 years", "common_error": "millenial"},
-            {"word": "influencer", "syllables": ["in", "flu", "en", "cer"], "hint": "someone with a social media following", "mnemonic": "IN + FLU + EN + CER — four parts", "common_error": "influencier"},
-            {"word": "algorithm", "syllables": ["al", "go", "rithm"], "hint": "a set of rules a computer follows", "mnemonic": "AL + GO + RITHM (like RHYTHM minus H)", "common_error": "algoritm"},
-        ],
-    },
+TAG_LABELS = {
+    "everyday": "📖 Everyday",
+    "professional": "💼 Pro",
+    "mpd": "🚔 MPD",
+    "cyber": "🛡 Cyber",
+    "confused": "🔀 Confused",
+    "trending": "📱 Slang",
 }
+
+TAG_COLORS = {
+    "everyday": ("#e0f2fe", "#0369a1"),
+    "professional": ("#f3e8ff", "#7e22ce"),
+    "mpd": ("#e0e7ff", "#3730a3"),
+    "cyber": ("#dcfce7", "#166534"),
+    "confused": ("#fef9c3", "#854d0e"),
+    "trending": ("#fce7f3", "#be185d"),
+}
+
+# ==============================================================================
+# WORD BANK
+# Flat list — each word has a "difficulty" and a "tags" list (one or more).
+# Fields: syllables, hint (meaning), mnemonic (memory trick), common_error.
+# ==============================================================================
+
+WORD_BANK = [
+    {"word": "friend", "difficulty": "easy", "tags": ["everyday"], "syllables": ["friend"], "hint": "someone you know and like", "mnemonic": "Fri + END — your week ENDs with a friend", "common_error": "freind"},
+    {"word": "because", "difficulty": "easy", "tags": ["everyday"], "syllables": ["be", "cause"], "hint": "it tells you why", "mnemonic": "Big Elephants Can Always Understand Small Elephants", "common_error": "becuase"},
+    {"word": "weird", "difficulty": "easy", "tags": ["everyday"], "syllables": ["weird"], "hint": "strange, unusual", "mnemonic": "weird breaks the i-before-e rule — WE are weird together", "common_error": "wierd"},
+    {"word": "believe", "difficulty": "easy", "tags": ["everyday"], "syllables": ["be", "lieve"], "hint": "to think something is true", "mnemonic": "there's a LIE in beLIEve", "common_error": "belive"},
+    {"word": "receive", "difficulty": "easy", "tags": ["everyday"], "syllables": ["re", "ceive"], "hint": "to get something", "mnemonic": "i before e EXCEPT after c — reCEIVE", "common_error": "recieve"},
+    {"word": "tomorrow", "difficulty": "easy", "tags": ["everyday"], "syllables": ["to", "mor", "row"], "hint": "the day after today", "mnemonic": "two R's in TOMORROW — like two sunrises", "common_error": "tommorow"},
+    {"word": "until", "difficulty": "easy", "tags": ["everyday"], "syllables": ["un", "til"], "hint": "up to the time that", "mnemonic": "only ONE L — un + til", "common_error": "untill"},
+    {"word": "beginning", "difficulty": "easy", "tags": ["everyday"], "syllables": ["be", "gin", "ning"], "hint": "the start", "mnemonic": "double the N when you add -ING to beGIN", "common_error": "begining"},
+    {"word": "profound", "difficulty": "easy", "tags": ["everyday"], "syllables": ["pro", "found"], "hint": "deep or highly meaningful", "mnemonic": "PRO + FOUND — you FOUND a deep truth", "common_error": "profund"},
+    {"word": "diligent", "difficulty": "easy", "tags": ["everyday"], "syllables": ["dil", "i", "gent"], "hint": "consistently careful and hardworking", "mnemonic": "DIL + I + GENT — a diligent gentleman", "common_error": "delligent"},
+    {"word": "astute", "difficulty": "easy", "tags": ["everyday"], "syllables": ["a", "stute"], "hint": "clever and perceptive", "mnemonic": "A + STUTE — an 'a-cute' observation", "common_error": "astude"},
+    {"word": "candid", "difficulty": "easy", "tags": ["everyday"], "syllables": ["can", "did"], "hint": "honest and direct", "mnemonic": "CAN you be honest? I CANDID", "common_error": "canded"},
+    {"word": "february", "difficulty": "easy", "tags": ["everyday"], "syllables": ["feb", "ru", "ar", "y"], "hint": "the second month of the year", "mnemonic": "FEB + RU + ARY — say the hidden R: Feb-RU-ary", "common_error": "febuary"},
+    {"word": "jewelry", "difficulty": "easy", "tags": ["everyday"], "syllables": ["jew", "el", "ry"], "hint": "rings, necklaces, and similar accessories", "mnemonic": "JEWEL comes first, then RY — no extra E", "common_error": "jewelery"},
+    {"word": "definitely", "difficulty": "medium", "tags": ["everyday"], "syllables": ["def", "i", "nite", "ly"], "hint": "for sure, 100%", "mnemonic": "defiNITEly has NITE in it — not defin-ATE-ly", "common_error": "definately"},
+    {"word": "separate", "difficulty": "medium", "tags": ["everyday"], "syllables": ["sep", "a", "rate"], "hint": "to pull apart, divided", "mnemonic": "there's A RAT in sepARATe", "common_error": "seperate"},
+    {"word": "embarrassed", "difficulty": "medium", "tags": ["everyday"], "syllables": ["em", "bar", "rassed"], "hint": "feeling awkward or ashamed", "mnemonic": "two R's, two S's — Really Red, Super Shy", "common_error": "embarassed"},
+    {"word": "necessary", "difficulty": "medium", "tags": ["everyday"], "syllables": ["nec", "es", "sar", "y"], "hint": "needed, required", "mnemonic": "one Collar, two Socks (1 C, 2 S's)", "common_error": "neccessary"},
+    {"word": "achievement", "difficulty": "medium", "tags": ["everyday"], "syllables": ["a", "chieve", "ment"], "hint": "a success or accomplishment", "mnemonic": "i before e — aCHIEVE", "common_error": "acheivement"},
+    {"word": "argument", "difficulty": "medium", "tags": ["everyday"], "syllables": ["ar", "gu", "ment"], "hint": "a disagreement or debate", "mnemonic": "I lost an E in the argument", "common_error": "arguement"},
+    {"word": "existence", "difficulty": "medium", "tags": ["everyday"], "syllables": ["ex", "is", "tence"], "hint": "the state of being", "mnemonic": "ends in -ENCE not -ANCE", "common_error": "existance"},
+    {"word": "occasion", "difficulty": "medium", "tags": ["everyday"], "syllables": ["oc", "ca", "sion"], "hint": "a special event or time", "mnemonic": "two C's, one S — an ocCASion is a BIG deal", "common_error": "ocassion"},
+    {"word": "meticulous", "difficulty": "medium", "tags": ["everyday"], "syllables": ["me", "tic", "u", "lous"], "hint": "very careful and precise about details", "mnemonic": "ME + TIC + U + LOUS — ticks off every detail", "common_error": "meticulus"},
+    {"word": "eloquent", "difficulty": "medium", "tags": ["everyday"], "syllables": ["el", "o", "quent"], "hint": "clear and persuasive when speaking", "mnemonic": "EL + O + QUENT — like its cousin 'loquacious'", "common_error": "elequent"},
+    {"word": "pragmatic", "difficulty": "medium", "tags": ["everyday"], "syllables": ["prag", "mat", "ic"], "hint": "practical and realistic", "mnemonic": "PRAG + MAT + IC — a practical MAT to stand on", "common_error": "pragmattic"},
+    {"word": "ambiguous", "difficulty": "medium", "tags": ["everyday"], "syllables": ["am", "big", "u", "ous"], "hint": "unclear, having multiple meanings", "mnemonic": "AM + BIG + U + OUS — a BIG amount of uncertainty", "common_error": "ambigous"},
+    {"word": "tedious", "difficulty": "medium", "tags": ["everyday"], "syllables": ["te", "di", "ous"], "hint": "long, repetitive, and boring", "mnemonic": "TE + DI + OUS — feels like it drags on forever", "common_error": "tedius"},
+    {"word": "impeccable", "difficulty": "medium", "tags": ["everyday"], "syllables": ["im", "pec", "ca", "ble"], "hint": "without any noticeable faults", "mnemonic": "IM + PECC + ABLE — not even a peck of fault", "common_error": "impecable"},
+    {"word": "plausible", "difficulty": "medium", "tags": ["everyday"], "syllables": ["plau", "si", "ble"], "hint": "reasonable or believable", "mnemonic": "PLAU + SI + BLE — you could apPLAUd the logic", "common_error": "plausable"},
+    {"word": "resilient", "difficulty": "medium", "tags": ["everyday"], "syllables": ["re", "sil", "ient"], "hint": "able to recover from difficulty", "mnemonic": "RE + SIL + IENT — bounces back again (RE-)", "common_error": "resiliant"},
+    {"word": "rhythm", "difficulty": "hard", "tags": ["everyday"], "syllables": ["rhy", "thm"], "hint": "a regular beat or pattern", "mnemonic": "Rhythm Helps Your Two Hips Move — Y is the only vowel", "common_error": "rythm"},
+    {"word": "conscience", "difficulty": "hard", "tags": ["everyday"], "syllables": ["con", "science"], "hint": "your inner moral sense", "mnemonic": "con + SCIENCE — the science of right and wrong", "common_error": "conscence"},
+    {"word": "acquiesce", "difficulty": "hard", "tags": ["everyday"], "syllables": ["ac", "qui", "esce"], "hint": "to reluctantly agree", "mnemonic": "AC + QUI + ESCE — the CQ together is rare", "common_error": "aquiesce"},
+    {"word": "chrysanthemum", "difficulty": "hard", "tags": ["everyday"], "syllables": ["chry", "san", "the", "mum"], "hint": "a type of flower", "mnemonic": "CHRY + SAN + THE + MUM — Greek roots: gold flower", "common_error": "chrysantemum"},
+    {"word": "onomatopoeia", "difficulty": "hard", "tags": ["everyday"], "syllables": ["on", "o", "ma", "to", "poe", "ia"], "hint": "words that sound like what they mean (buzz, hiss)", "mnemonic": "Old Nuns On Mopeds Are Tall, Often Pregnant, Often Eating Ice-cream Alone", "common_error": "onomatopeia"},
+    {"word": "supersede", "difficulty": "hard", "tags": ["everyday"], "syllables": ["su", "per", "sede"], "hint": "to replace or take the place of", "mnemonic": "the only -SEDE word in English — all others use -CEDE or -CEED", "common_error": "supercede"},
+    {"word": "succinct", "difficulty": "hard", "tags": ["everyday"], "syllables": ["suc", "cinct"], "hint": "brief but clearly expressed", "mnemonic": "SUC + CINCT — double C's, cinched tight", "common_error": "succint"},
+    {"word": "mischievous", "difficulty": "hard", "tags": ["everyday"], "syllables": ["mis", "chie", "vous"], "hint": "playfully naughty", "mnemonic": "only 3 syllables — MIS-CHIE-VOUS, no extra I", "common_error": "mischevious"},
+    {"word": "phenomenon", "difficulty": "hard", "tags": ["everyday"], "syllables": ["phe", "nom", "e", "non"], "hint": "a remarkable or notable occurrence", "mnemonic": "PHE + NOM + E + NON — ends in -NON not -NA", "common_error": "phenomenom"},
+    {"word": "business", "difficulty": "easy", "tags": ["professional"], "syllables": ["busi", "ness"], "hint": "a commercial activity or company", "mnemonic": "busi + NESS — full of BUSY-ness", "common_error": "buisness"},
+    {"word": "schedule", "difficulty": "easy", "tags": ["professional"], "syllables": ["sched", "ule"], "hint": "a plan of timed events", "mnemonic": "SCH at the start — like SCHool", "common_error": "schedual"},
+    {"word": "career", "difficulty": "easy", "tags": ["professional"], "syllables": ["ca", "reer"], "hint": "a long-term profession", "mnemonic": "two R's, two E's — a long road", "common_error": "carreer"},
+    {"word": "colleague", "difficulty": "easy", "tags": ["professional"], "syllables": ["col", "league"], "hint": "a work partner", "mnemonic": "col + LEAGUE — you're in the same league", "common_error": "collegue"},
+    {"word": "benefit", "difficulty": "easy", "tags": ["professional"], "syllables": ["ben", "e", "fit"], "hint": "a helpful perk or advantage", "mnemonic": "one N, one F — a slim benefit", "common_error": "benifit"},
+    {"word": "implement", "difficulty": "easy", "tags": ["professional"], "syllables": ["im", "ple", "ment"], "hint": "to put a plan into action", "mnemonic": "IM + PLE + MENT", "common_error": "impliment"},
+    {"word": "evaluate", "difficulty": "easy", "tags": ["professional"], "syllables": ["e", "val", "u", "ate"], "hint": "to judge the value or worth of something", "mnemonic": "E + VALU + ATE — find the VALUe", "common_error": "evaluvate"},
+    {"word": "objective", "difficulty": "easy", "tags": ["professional"], "syllables": ["ob", "jec", "tive"], "hint": "a goal, or free from personal bias", "mnemonic": "OB + JEC + TIVE", "common_error": "objectiv"},
+    {"word": "concise", "difficulty": "easy", "tags": ["professional"], "syllables": ["con", "cise"], "hint": "brief and clear", "mnemonic": "CON + CISE — cut (cise) it short", "common_error": "consise"},
+    {"word": "accommodate", "difficulty": "medium", "tags": ["professional"], "syllables": ["ac", "com", "mo", "date"], "hint": "to make room for", "mnemonic": "two C's AND two M's — room for everyone", "common_error": "accomodate"},
+    {"word": "maintenance", "difficulty": "medium", "tags": ["professional"], "syllables": ["main", "ten", "ance"], "hint": "keeping things running", "mnemonic": "mainTENance has TEN in it, not TAIN", "common_error": "maintainance"},
+    {"word": "questionnaire", "difficulty": "medium", "tags": ["professional"], "syllables": ["ques", "tion", "naire"], "hint": "a survey", "mnemonic": "double N before AIRE — French import", "common_error": "questionaire"},
+    {"word": "occurrence", "difficulty": "medium", "tags": ["professional"], "syllables": ["oc", "cur", "rence"], "hint": "something that happens", "mnemonic": "two C's, two R's — it occurred twice", "common_error": "occurence"},
+    {"word": "liaison", "difficulty": "medium", "tags": ["professional"], "syllables": ["li", "ai", "son"], "hint": "a person who connects two groups", "mnemonic": "LI-AI-SON — three vowel clusters in a row", "common_error": "liason"},
+    {"word": "privilege", "difficulty": "medium", "tags": ["professional", "cyber"], "syllables": ["priv", "i", "lege"], "hint": "a special right or advantage", "mnemonic": "priv + i + LEGE — no D anywhere", "common_error": "priviledge"},
+    {"word": "recommend", "difficulty": "medium", "tags": ["professional"], "syllables": ["rec", "om", "mend"], "hint": "to suggest as good", "mnemonic": "one C, two M's — I reComMend", "common_error": "reccomend"},
+    {"word": "initiative", "difficulty": "medium", "tags": ["professional"], "syllables": ["i", "ni", "tia", "tive"], "hint": "the ability to act independently", "mnemonic": "I + NI + TIA + TIVE", "common_error": "innitiative"},
+    {"word": "facilitate", "difficulty": "medium", "tags": ["professional"], "syllables": ["fa", "cil", "i", "tate"], "hint": "to make a process easier", "mnemonic": "FA + CIL + I + TATE — makes it FACILe (easy)", "common_error": "facilliate"},
+    {"word": "collaborate", "difficulty": "medium", "tags": ["professional"], "syllables": ["col", "lab", "o", "rate"], "hint": "to work together with others", "mnemonic": "CO + LABOR + ATE — LABOR together", "common_error": "colaborate"},
+    {"word": "strategic", "difficulty": "medium", "tags": ["professional"], "syllables": ["stra", "te", "gic"], "hint": "planned to achieve a long-term goal", "mnemonic": "STRA + TE + GIC — a STRATEGY made adjective", "common_error": "stratigic"},
+    {"word": "bureaucracy", "difficulty": "hard", "tags": ["professional"], "syllables": ["bu", "reau", "cra", "cy"], "hint": "government or corporate red tape", "mnemonic": "BU-REAU (French) + CRACY — rule by desks", "common_error": "beaurocracy"},
+    {"word": "entrepreneur", "difficulty": "hard", "tags": ["professional"], "syllables": ["en", "tre", "pre", "neur"], "hint": "someone who starts a business", "mnemonic": "French word — ends in NEUR not NUER", "common_error": "entreprenuer"},
+    {"word": "consensus", "difficulty": "hard", "tags": ["professional"], "syllables": ["con", "sen", "sus"], "hint": "general agreement among a group", "mnemonic": "CON + SENSUS — common sense", "common_error": "concensus"},
+    {"word": "conscientious", "difficulty": "hard", "tags": ["professional"], "syllables": ["con", "scien", "tious"], "hint": "careful and diligent", "mnemonic": "CON + SCIENCE + TIOUS — guided by conscience", "common_error": "conscientous"},
+    {"word": "itinerary", "difficulty": "hard", "tags": ["professional"], "syllables": ["i", "tin", "er", "ar", "y"], "hint": "a travel plan", "mnemonic": "I + TIN + ER + ARY — five parts, like five stops", "common_error": "itenerary"},
+    {"word": "discrepancy", "difficulty": "hard", "tags": ["professional", "mpd"], "syllables": ["dis", "crep", "an", "cy"], "hint": "a difference between things that should match", "mnemonic": "DIS + CREP + AN + CY", "common_error": "discrepency"},
+    {"word": "comprehensive", "difficulty": "hard", "tags": ["professional"], "syllables": ["com", "pre", "hen", "sive"], "hint": "complete, covering everything", "mnemonic": "COM + PRE + HEN + SIVE", "common_error": "comprehensiv"},
+    {"word": "affect", "difficulty": "easy", "tags": ["confused"], "syllables": ["af", "fect"], "hint": "verb: to influence or change something", "mnemonic": "Affect is Action — both start with A", "common_error": "effect"},
+    {"word": "effect", "difficulty": "easy", "tags": ["confused"], "syllables": ["ef", "fect"], "hint": "noun: a result or consequence", "mnemonic": "Effect is the End result — both start with E", "common_error": "affect"},
+    {"word": "than", "difficulty": "easy", "tags": ["confused"], "syllables": ["than"], "hint": "used to compare two things", "mnemonic": "thAn is for compArisons — same A", "common_error": "then"},
+    {"word": "then", "difficulty": "easy", "tags": ["confused"], "syllables": ["then"], "hint": "refers to time, what happens next", "mnemonic": "thEn tells whEn something happens", "common_error": "than"},
+    {"word": "accept", "difficulty": "easy", "tags": ["confused"], "syllables": ["ac", "cept"], "hint": "verb: to agree to receive or take something", "mnemonic": "ACCept — you take it in", "common_error": "except"},
+    {"word": "except", "difficulty": "easy", "tags": ["confused"], "syllables": ["ex", "cept"], "hint": "preposition: excluding, other than", "mnemonic": "EXcept EXcludes something", "common_error": "accept"},
+    {"word": "your", "difficulty": "easy", "tags": ["confused"], "syllables": ["your"], "hint": "belonging to you", "mnemonic": "YOUR shows ownership, no apostrophe", "common_error": "you're"},
+    {"word": "you're", "difficulty": "easy", "tags": ["confused"], "syllables": ["you're"], "hint": "contraction meaning 'you are'", "mnemonic": "the apostrophe stands in for the A in 'you ARE'", "common_error": "your"},
+    {"word": "its", "difficulty": "easy", "tags": ["confused"], "syllables": ["its"], "hint": "belonging to it — no apostrophe", "mnemonic": "ITS is possessive, like HIS or HERS", "common_error": "it's"},
+    {"word": "it's", "difficulty": "easy", "tags": ["confused"], "syllables": ["it's"], "hint": "contraction meaning 'it is' or 'it has'", "mnemonic": "the apostrophe stands in for the I in 'it IS'", "common_error": "its"},
+    {"word": "complement", "difficulty": "medium", "tags": ["confused"], "syllables": ["com", "ple", "ment"], "hint": "something that completes or pairs well with another", "mnemonic": "compleMENT — it compleTES the set", "common_error": "compliment"},
+    {"word": "compliment", "difficulty": "medium", "tags": ["confused"], "syllables": ["com", "pli", "ment"], "hint": "a nice remark that praises someone", "mnemonic": "complIment — I like getting compliments", "common_error": "complement"},
+    {"word": "principal", "difficulty": "medium", "tags": ["confused"], "syllables": ["prin", "ci", "pal"], "hint": "the person in charge, or most important", "mnemonic": "the principAL is your PAL", "common_error": "principle"},
+    {"word": "principle", "difficulty": "medium", "tags": ["confused"], "syllables": ["prin", "ci", "ple"], "hint": "a fundamental rule or belief", "mnemonic": "a principLE is a ruLE", "common_error": "principal"},
+    {"word": "lose", "difficulty": "medium", "tags": ["confused"], "syllables": ["lose"], "hint": "to fail to win, or to misplace something", "mnemonic": "LOSE has one O — you lOSE it", "common_error": "loose"},
+    {"word": "loose", "difficulty": "medium", "tags": ["confused"], "syllables": ["loose"], "hint": "not tight, not firmly fixed", "mnemonic": "LOOSE has two O's — room to move", "common_error": "lose"},
+    {"word": "stationary", "difficulty": "medium", "tags": ["confused"], "syllables": ["sta", "tion", "ar", "y"], "hint": "not moving, staying in place", "mnemonic": "stationAry — stAying still", "common_error": "stationery"},
+    {"word": "stationery", "difficulty": "medium", "tags": ["confused"], "syllables": ["sta", "tion", "er", "y"], "hint": "paper and writing supplies", "mnemonic": "stationEry — lEtters written on it", "common_error": "stationary"},
+    {"word": "rizz", "difficulty": "easy", "tags": ["trending"], "syllables": ["rizz"], "hint": "charisma, flirting skill (2024+ slang)", "mnemonic": "cha-RIZZ-ma, two Z's", "common_error": "riz"},
+    {"word": "cringe", "difficulty": "easy", "tags": ["trending"], "syllables": ["cringe"], "hint": "secondhand embarrassment", "mnemonic": "crin + GE — G sounds like J here", "common_error": "crindge"},
+    {"word": "vibe", "difficulty": "easy", "tags": ["trending"], "syllables": ["vibe"], "hint": "an atmosphere or feeling", "mnemonic": "V-I-B-E — four letters, one vibe", "common_error": "viebe"},
+    {"word": "slay", "difficulty": "easy", "tags": ["trending"], "syllables": ["slay"], "hint": "to do something exceptionally well", "mnemonic": "S-L-A-Y — four letters, total win", "common_error": "slae"},
+    {"word": "aesthetic", "difficulty": "medium", "tags": ["trending"], "syllables": ["aes", "thet", "ic"], "hint": "a visual style or vibe", "mnemonic": "starts with AE — Artistic Energy", "common_error": "asthetic"},
+    {"word": "delulu", "difficulty": "medium", "tags": ["trending"], "syllables": ["de", "lu", "lu"], "hint": "playfully delusional (social media)", "mnemonic": "de + LU + LU, LU twice like seeing double", "common_error": "delooloo"},
+    {"word": "brainrot", "difficulty": "medium", "tags": ["trending"], "syllables": ["brain", "rot"], "hint": "the feeling after too much scrolling", "mnemonic": "BRAIN + ROT, one word", "common_error": "brain-rot"},
+    {"word": "crashout", "difficulty": "medium", "tags": ["trending"], "syllables": ["crash", "out"], "hint": "a dramatic meltdown", "mnemonic": "CRASH + OUT, one word", "common_error": "crash-out"},
+    {"word": "synergize", "difficulty": "medium", "tags": ["trending"], "syllables": ["syn", "er", "gize"], "hint": "corporate: combine forces", "mnemonic": "syn (together) + ergy + ize", "common_error": "synergyze"},
+    {"word": "leverage", "difficulty": "medium", "tags": ["trending"], "syllables": ["lev", "er", "age"], "hint": "to use as an advantage", "mnemonic": "LEVER + AGE — use the lever", "common_error": "leverege"},
+    {"word": "millennial", "difficulty": "hard", "tags": ["trending"], "syllables": ["mil", "len", "ni", "al"], "hint": "generation born ~1981–1996", "mnemonic": "two L's, two N's — millennium = 1000 years", "common_error": "millenial"},
+    {"word": "influencer", "difficulty": "hard", "tags": ["trending"], "syllables": ["in", "flu", "en", "cer"], "hint": "someone with a social media following", "mnemonic": "IN + FLU + EN + CER — four parts", "common_error": "influencier"},
+    {"word": "algorithm", "difficulty": "hard", "tags": ["trending"], "syllables": ["al", "go", "rithm"], "hint": "a set of rules a computer follows", "mnemonic": "AL + GO + RITHM (like RHYTHM minus H)", "common_error": "algoritm"},
+    {"word": "witness", "difficulty": "easy", "tags": ["mpd"], "syllables": ["wit", "ness"], "hint": "someone who saw an event happen", "mnemonic": "WIT + NESS — a sharp WIT sees everything", "common_error": "witnes"},
+    {"word": "custody", "difficulty": "easy", "tags": ["mpd"], "syllables": ["cus", "to", "dy"], "hint": "official detention or care", "mnemonic": "CUS + TO + DY — three even parts", "common_error": "custady"},
+    {"word": "juvenile", "difficulty": "easy", "tags": ["mpd"], "syllables": ["ju", "ve", "nile"], "hint": "a minor, someone under 18", "mnemonic": "JU + VE + NILE — like the NILE river", "common_error": "juvinile"},
+    {"word": "patrol", "difficulty": "easy", "tags": ["mpd"], "syllables": ["pa", "trol"], "hint": "to actively monitor an area", "mnemonic": "PATROL rhymes with CONTROL — controlling the area", "common_error": "petrol"},
+    {"word": "citation", "difficulty": "easy", "tags": ["mpd"], "syllables": ["ci", "ta", "tion"], "hint": "an official notice for a violation", "mnemonic": "CITE + ATION — you CITE the rule they broke", "common_error": "citiation"},
+    {"word": "detective", "difficulty": "easy", "tags": ["mpd"], "syllables": ["de", "tec", "tive"], "hint": "an investigator, often plainclothes", "mnemonic": "DE + TEC + TIVE — DETECts the truth", "common_error": "detectave"},
+    {"word": "allegation", "difficulty": "easy", "tags": ["mpd"], "syllables": ["al", "le", "ga", "tion"], "hint": "a claim made without proof yet", "mnemonic": "AL + LEGE + ATION — you ALLEGE it happened", "common_error": "allegetion"},
+    {"word": "credible", "difficulty": "easy", "tags": ["mpd"], "syllables": ["cred", "i", "ble"], "hint": "believable, trustworthy", "mnemonic": "CRED + IBLE — it has CREDit (trust)", "common_error": "credable"},
+    {"word": "vigilant", "difficulty": "easy", "tags": ["mpd"], "syllables": ["vig", "i", "lant"], "hint": "watchful and alert to danger", "mnemonic": "VIG + I + LANT — an ANT is always alert", "common_error": "vigilent"},
+    {"word": "surveillance", "difficulty": "medium", "tags": ["mpd"], "syllables": ["sur", "veil", "lance"], "hint": "close monitoring of a person or place", "mnemonic": "SUR + VEIL + LANCE — a VEIL hides the watcher", "common_error": "surveilance"},
+    {"word": "apprehend", "difficulty": "medium", "tags": ["mpd"], "syllables": ["ap", "pre", "hend"], "hint": "to arrest or seize someone", "mnemonic": "AP + PRE + HEND — two P's, from Latin 'to seize'", "common_error": "aprehend"},
+    {"word": "interrogate", "difficulty": "medium", "tags": ["mpd"], "syllables": ["in", "ter", "ro", "gate"], "hint": "to formally question, especially a suspect", "mnemonic": "INTER + RO + GATE — INTERrupt with questions", "common_error": "interogate"},
+    {"word": "perpetrator", "difficulty": "medium", "tags": ["mpd"], "syllables": ["per", "pe", "tra", "tor"], "hint": "the person who committed the offense", "mnemonic": "PER + PE + TRA + TOR — the one who PERpetrates", "common_error": "perpretrator"},
+    {"word": "testimony", "difficulty": "medium", "tags": ["mpd"], "syllables": ["tes", "ti", "mo", "ny"], "hint": "a formal statement given as evidence", "mnemonic": "TEST + I + MO + NY — you TEST what they say", "common_error": "testamony"},
+    {"word": "subpoena", "difficulty": "medium", "tags": ["mpd"], "syllables": ["sub", "poe", "na"], "hint": "a legal order to appear in court or produce evidence", "mnemonic": "SUB + POENA — silent P! sub-PEE-na", "common_error": "supeona"},
+    {"word": "negligence", "difficulty": "medium", "tags": ["mpd"], "syllables": ["neg", "li", "gence"], "hint": "failure to take proper care, carelessness", "mnemonic": "NEG + LI + GENCE — NEGative attention to diligence", "common_error": "negligance"},
+    {"word": "compliant", "difficulty": "medium", "tags": ["mpd"], "syllables": ["com", "pli", "ant"], "hint": "following rules or requirements", "mnemonic": "COM + PLI + ANT — COMPLies with the rule", "common_error": "complient"},
+    {"word": "corroborate", "difficulty": "medium", "tags": ["mpd"], "syllables": ["cor", "rob", "o", "rate"], "hint": "to confirm or support with evidence", "mnemonic": "COR + ROB + O + RATE — co-confirms the story", "common_error": "corabborate"},
+    {"word": "articulate", "difficulty": "medium", "tags": ["mpd"], "syllables": ["ar", "tic", "u", "late"], "hint": "able to express oneself clearly", "mnemonic": "AR + TIC + U + LATE — clear ARTICulation", "common_error": "artriculate"},
+    {"word": "reconnaissance", "difficulty": "hard", "tags": ["mpd", "cyber"], "syllables": ["re", "con", "nais", "sance"], "hint": "preliminary scouting or information-gathering", "mnemonic": "RE + CON + NAIS + SANCE — French military term, double S", "common_error": "reconaissance"},
+    {"word": "acquittal", "difficulty": "hard", "tags": ["mpd"], "syllables": ["ac", "quit", "tal"], "hint": "a legal decision of not guilty", "mnemonic": "AC + QUIT + TAL — you're QUIT of the charge", "common_error": "aquittal"},
+    {"word": "jurisdiction", "difficulty": "hard", "tags": ["mpd", "professional"], "syllables": ["ju", "ris", "dic", "tion"], "hint": "the official authority or area of legal power", "mnemonic": "JURIS (law) + DICTION (speaking) — the law that speaks here", "common_error": "jurisdicton"},
+    {"word": "circumstantial", "difficulty": "hard", "tags": ["mpd"], "syllables": ["cir", "cum", "stan", "tial"], "hint": "evidence based on inference, not direct proof", "mnemonic": "CIRCUM + STANTIAL — circles the fact instead of hitting it directly", "common_error": "circumstancial"},
+    {"word": "indictment", "difficulty": "hard", "tags": ["mpd"], "syllables": ["in", "dict", "ment"], "hint": "a formal accusation of a serious crime", "mnemonic": "IN + DICT + MENT — silent C! in-DITE-ment", "common_error": "inditement"},
+    {"word": "impartial", "difficulty": "hard", "tags": ["mpd"], "syllables": ["im", "par", "tial"], "hint": "unbiased, treating all sides fairly", "mnemonic": "IM + PAR + TIAL — not favoring either PARTy", "common_error": "impartual"},
+    {"word": "de-escalate", "difficulty": "hard", "tags": ["mpd"], "syllables": ["de", "es", "ca", "late"], "hint": "to reduce the intensity of a conflict", "mnemonic": "DE + ESCALATE — the opposite of escalating (going up)", "common_error": "deescalate"},
+    {"word": "authentication", "difficulty": "easy", "tags": ["cyber"], "syllables": ["au", "then", "ti", "ca", "tion"], "hint": "verifying that someone is who they claim to be", "mnemonic": "AUTH + EN + TIC + ATION — proving it's AUTHentic", "common_error": "authentification"},
+    {"word": "persistence", "difficulty": "easy", "tags": ["cyber"], "syllables": ["per", "sis", "tence"], "hint": "maintaining access to a system over time", "mnemonic": "PER + SIST + ENCE — persists, keeps going", "common_error": "persistance"},
+    {"word": "vulnerability", "difficulty": "medium", "tags": ["cyber"], "syllables": ["vul", "ner", "a", "bil", "i", "ty"], "hint": "a weakness that can be exploited", "mnemonic": "VUL + NER + A + BIL + I + TY — six parts, one weak spot", "common_error": "vulnerabiliy"},
+    {"word": "remediation", "difficulty": "medium", "tags": ["cyber"], "syllables": ["re", "me", "di", "a", "tion"], "hint": "fixing or correcting a security issue", "mnemonic": "RE + MEDI + ATION — like MEDIcine to heal the flaw", "common_error": "remediaton"},
+    {"word": "enumeration", "difficulty": "medium", "tags": ["cyber"], "syllables": ["e", "nu", "mer", "a", "tion"], "hint": "systematically discovering information about a target", "mnemonic": "E + NUM + ER + ATION — counts (NUMbers) everything found", "common_error": "enummeration"},
+    {"word": "exploitation", "difficulty": "medium", "tags": ["cyber"], "syllables": ["ex", "ploi", "ta", "tion"], "hint": "taking advantage of a vulnerability", "mnemonic": "EX + PLOIT + ATION", "common_error": "exploitaton"},
+    {"word": "obfuscation", "difficulty": "hard", "tags": ["cyber"], "syllables": ["ob", "fus", "ca", "tion"], "hint": "deliberately making something unclear or hard to understand", "mnemonic": "OB + FUS + CATION — a FOG (fus) of confusion", "common_error": "obsfucation"},
+    {"word": "exfiltration", "difficulty": "hard", "tags": ["cyber"], "syllables": ["ex", "fil", "tra", "tion"], "hint": "stealing and moving data out of a system", "mnemonic": "EX + FIL + TRA + TION — EXits with the FILes", "common_error": "exfiltraton"},
+]
 
 # ==============================================================================
 # HELPERS
@@ -121,12 +200,12 @@ WORD_BANK = {
 VOWELS = set("aeiouAEIOU")
 
 def get_filtered_bank(categories, difficulties):
-    """Return flat list of word dicts matching selected filters."""
-    words = []
-    for cat in categories:
-        for diff in difficulties:
-            words.extend(WORD_BANK.get(cat, {}).get(diff, []))
-    return words
+    """Return list of word dicts matching the selected tags/difficulties.
+    A word matches if ANY of its tags is in `categories` — words can belong to
+    more than one category (e.g. "privilege" is tagged both professional and cyber)."""
+    cat_set = set(categories)
+    diff_set = set(difficulties)
+    return [w for w in WORD_BANK if w["difficulty"] in diff_set and cat_set.intersection(w["tags"])]
 
 def analyze_error(correct, attempt):
     """Return a dict describing how the attempt differs from the correct word."""
@@ -175,6 +254,55 @@ def error_description(err):
     if t == "too_long":
         return "Your answer has too many letters"
     return "Close, but not quite"
+
+def generate_typo_variant(word, avoid=None):
+    """Create a plausible-looking misspelling of `word`, distinct from anything in `avoid`."""
+    avoid = avoid or set()
+    candidates = []
+    if len(word) > 3:
+        for _ in range(12):
+            i = random.randint(0, len(word) - 2)
+            variant = word[:i] + word[i + 1] + word[i] + word[i + 2:]
+            if variant != word and variant not in avoid:
+                candidates.append(variant)
+    if len(word) > 2:
+        i = random.randint(1, len(word) - 1)
+        variant = word[:i] + word[i] + word[i:]
+        if variant != word and variant not in avoid:
+            candidates.append(variant)
+    if len(word) > 4:
+        i = random.randint(1, len(word) - 2)
+        variant = word[:i] + word[i + 1:]
+        if variant != word and variant not in avoid:
+            candidates.append(variant)
+    return random.choice(candidates) if candidates else word[::-1]
+
+def pick_meaning_options(target, bank):
+    """Return 4 shuffled meaning options (the real one + 3 decoys pulled from other words)."""
+    correct = target["hint"]
+    pool = [b["hint"] for b in bank if b["word"] != target["word"] and b["hint"] != correct]
+    decoys = random.sample(pool, min(3, len(pool))) if pool else []
+    options = [correct] + decoys
+    random.shuffle(options)
+    return options
+
+def pick_spelling_options(target):
+    """Return 3-4 shuffled spelling options (the real spelling + common_error + generated typos)."""
+    correct = target["word"]
+    options = [correct]
+    common_err = target.get("common_error")
+    if common_err and common_err != correct:
+        options.append(common_err)
+    seen = set(options)
+    tries = 0
+    while len(options) < 4 and tries < 20:
+        variant = generate_typo_variant(correct, avoid=seen)
+        if variant not in seen:
+            options.append(variant)
+            seen.add(variant)
+        tries += 1
+    random.shuffle(options)
+    return options
 
 def render_phonetic_html(word, accent="#0D8F7F"):
     """Return HTML where vowels are colored/underlined, consonants are plain."""
@@ -277,7 +405,7 @@ def syllable_pills_html(syllables, accent="#0D8F7F"):
 def init_state():
     defaults = {
         "screen": "home",
-        "categories": ["everyday", "professional"],
+        "categories": ["everyday", "professional", "mpd", "cyber", "confused"],
         "difficulties": ["easy", "medium"],
         "game_mode": "dictation",
         "current_word": None,
@@ -294,6 +422,7 @@ def init_state():
         "mastered": set(),
         "session_seen": set(),
         "recent_errors": [],  # list of recently-missed words for spaced repetition
+        "mc_options": None,  # choices for meaning_check / spot_spelling modes
     }
     for k, v in defaults.items():
         if k not in st.session_state:
@@ -337,41 +466,73 @@ def start_round():
     st.session_state.show_hint = False
     st.session_state.session_seen.add(w["word"])
     st.session_state.screen = "play"
-
-def submit_attempt():
-    w = st.session_state.current_word
-    if not w:
-        return
-    guess = st.session_state.attempt.strip().lower()
-    if not guess:
-        return
-    correct = w["word"].lower()
-    st.session_state.total_attempts += 1
-    if guess == correct:
-        st.session_state.feedback = "correct"
-        gained = 10 + st.session_state.streak * 2
-        st.session_state.xp += gained
-        st.session_state.streak += 1
-        st.session_state.best_streak = max(st.session_state.best_streak, st.session_state.streak)
-        st.session_state.total_correct += 1
-        # Mark mastered if no recent errors for this word
-        recent_misses = sum(1 for e in st.session_state.error_history[-15:] if e["word"] == correct)
-        if recent_misses == 0:
-            st.session_state.mastered.add(correct)
+    if st.session_state.game_mode == "meaning_check":
+        bank = get_filtered_bank(st.session_state.categories, st.session_state.difficulties)
+        st.session_state.mc_options = pick_meaning_options(w, bank)
+    elif st.session_state.game_mode == "spot_spelling":
+        st.session_state.mc_options = pick_spelling_options(w)
     else:
-        st.session_state.feedback = "wrong"
-        err = analyze_error(correct, guess)
+        st.session_state.mc_options = None
+
+def apply_correct_result(w):
+    st.session_state.feedback = "correct"
+    gained = 10 + st.session_state.streak * 2
+    st.session_state.xp += gained
+    st.session_state.streak += 1
+    st.session_state.best_streak = max(st.session_state.best_streak, st.session_state.streak)
+    st.session_state.total_correct += 1
+    correct = w["word"].lower()
+    # Mark mastered if no recent errors for this word
+    recent_misses = sum(1 for e in st.session_state.error_history[-15:] if e["word"] == correct)
+    if recent_misses == 0:
+        st.session_state.mastered.add(correct)
+
+def apply_wrong_result(w, typed_spelling=None):
+    st.session_state.feedback = "wrong"
+    correct = w["word"].lower()
+    st.session_state.streak = 0
+    if typed_spelling is not None:
+        err = analyze_error(correct, typed_spelling)
         st.session_state.error_info = err
-        st.session_state.streak = 0
         st.session_state.error_history.append({
             "word": correct,
-            "attempt": guess,
+            "attempt": typed_spelling,
             "error_type": err["type"] if err else "unknown",
             "timestamp": datetime.now().isoformat(),
         })
         st.session_state.recent_errors.append(correct)
         if len(st.session_state.recent_errors) > 20:
             st.session_state.recent_errors = st.session_state.recent_errors[-20:]
+    else:
+        st.session_state.error_info = None
+
+def submit_attempt():
+    w = st.session_state.current_word
+    if not w:
+        return
+    guess_raw = st.session_state.attempt
+    if not guess_raw:
+        return
+    st.session_state.total_attempts += 1
+    mode = st.session_state.game_mode
+
+    if mode == "meaning_check":
+        if guess_raw == w["hint"]:
+            apply_correct_result(w)
+        else:
+            apply_wrong_result(w, typed_spelling=None)
+    elif mode == "spot_spelling":
+        guess = guess_raw.strip().lower()
+        if guess == w["word"].lower():
+            apply_correct_result(w)
+        else:
+            apply_wrong_result(w, typed_spelling=guess)
+    else:
+        guess = guess_raw.strip().lower()
+        if guess == w["word"].lower():
+            apply_correct_result(w)
+        else:
+            apply_wrong_result(w, typed_spelling=guess)
 
 # ==============================================================================
 # UI — GLOBAL STYLES
@@ -426,6 +587,25 @@ st.markdown("""
 # SCREEN: HOME
 # ==============================================================================
 
+def toggle_pill_row(options, labels, state_key, per_row=3):
+    """Render tap-to-toggle pills (wrapped into rows of `per_row`) bound to a list in
+    st.session_state[state_key]. Mobile-friendlier than st.multiselect — one tap on/off
+    instead of opening a dropdown and hunting for a tiny × to remove a selection."""
+    selected = st.session_state[state_key]
+    for row_start in range(0, len(options), per_row):
+        row_opts = options[row_start:row_start + per_row]
+        cols = st.columns(per_row)
+        for i, opt in enumerate(row_opts):
+            is_on = opt in selected
+            with cols[i]:
+                if st.button(labels[opt], key=f"{state_key}_{opt}", use_container_width=True,
+                             type="primary" if is_on else "secondary"):
+                    if is_on:
+                        st.session_state[state_key] = [x for x in selected if x != opt]
+                    else:
+                        st.session_state[state_key] = selected + [opt]
+                    st.rerun()
+
 def screen_home():
     col_title, col_stats = st.columns([3, 2])
     with col_title:
@@ -444,35 +624,23 @@ def screen_home():
 
     st.markdown("---")
 
-    # Filters
+    # Filters — tap-to-toggle pills, not dropdown multiselects (much easier on a phone)
     st.markdown('<p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;'
                 'color:#888;font-weight:700;margin-bottom:0.3rem;">Categories</p>',
                 unsafe_allow_html=True)
-    cats = st.multiselect(
-        "Categories",
-        options=["everyday", "professional", "trending"],
-        default=st.session_state.categories,
-        label_visibility="collapsed",
-        format_func=lambda x: {
-            "everyday": "📖 Everyday",
-            "professional": "💼 Professional",
-            "trending": "📱 Trending slang",
-        }[x],
-    )
-    st.session_state.categories = cats
+    toggle_pill_row(list(TAG_LABELS.keys()), TAG_LABELS, "categories")
 
     st.markdown('<p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;'
                 'color:#888;font-weight:700;margin:0.8rem 0 0.3rem 0;">Difficulty</p>',
                 unsafe_allow_html=True)
-    diffs = st.multiselect(
-        "Difficulty",
-        options=["easy", "medium", "hard"],
-        default=st.session_state.difficulties,
-        label_visibility="collapsed",
-        format_func=lambda x: {"easy": "🟢 Easy", "medium": "🟡 Medium", "hard": "🔴 Hard"}[x],
+    toggle_pill_row(
+        ["easy", "medium", "hard"],
+        {"easy": "🟢 Easy", "medium": "🟡 Medium", "hard": "🔴 Hard"},
+        "difficulties",
     )
-    st.session_state.difficulties = diffs
 
+    cats = st.session_state.categories
+    diffs = st.session_state.difficulties
     bank_size = len(get_filtered_bank(cats, diffs))
     st.caption(f"Pool size: {bank_size} words  ·  Mastered: {len(st.session_state.mastered)}")
 
@@ -496,6 +664,20 @@ def screen_home():
         start_round()
         st.rerun()
 
+    # Drill 3: What's the Meaning?
+    if st.button("🧠  What's the Meaning?  —  See the word, pick its true definition",
+                 use_container_width=True):
+        st.session_state.game_mode = "meaning_check"
+        start_round()
+        st.rerun()
+
+    # Drill 4: Spot the Spelling
+    if st.button("🔤  Spot the Spelling  —  Given the meaning, pick the correctly spelled word",
+                 use_container_width=True):
+        st.session_state.game_mode = "spot_spelling"
+        start_round()
+        st.rerun()
+
     # Stats view
     if st.button("📊  My Error Patterns  —  See your personal mistakes: dropped letters, swaps, substitutions",
                  use_container_width=True):
@@ -510,6 +692,93 @@ def screen_home():
         c1.metric("Accuracy", f"{accuracy}%")
         c2.metric("Mastered", len(st.session_state.mastered))
         c3.metric("Best streak", st.session_state.best_streak)
+
+# ==============================================================================
+# SCREEN: PLAY (multiple-choice modes — meaning_check / spot_spelling)
+# ==============================================================================
+
+def screen_play_mc(w):
+    mode = st.session_state.game_mode
+    options = st.session_state.mc_options or []
+
+    if st.session_state.feedback is None:
+        if mode == "meaning_check":
+            st.markdown(
+                '<div style="background:linear-gradient(135deg,#0D8F7F08,#0D8F7F18);'
+                'border:1px solid #0D8F7F25;border-radius:20px;padding:25px 15px;text-align:center;">',
+                unsafe_allow_html=True,
+            )
+            tts_component(w["word"], label="🔊 Hear the word", rate=1.0, key=f"tts_mc_{w['word']}")
+            st.markdown(
+                f'<div style="font-size:2rem;font-weight:800;font-family:Georgia,serif;'
+                f'text-align:center;margin:10px 0 0 0;">{w["word"]}</div>',
+                unsafe_allow_html=True,
+            )
+            st.markdown("</div>", unsafe_allow_html=True)
+            st.markdown('<p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;'
+                        'color:#888;font-weight:700;margin:15px 0 6px 0;">What does this mean?</p>',
+                        unsafe_allow_html=True)
+        else:  # spot_spelling
+            st.markdown(
+                '<div style="background:linear-gradient(135deg,#0D8F7F08,#0D8F7F18);'
+                'border:1px solid #0D8F7F25;border-radius:20px;padding:20px 15px;text-align:center;">'
+                '<p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#888;'
+                f'font-weight:700;margin-bottom:8px;">This word means</p>'
+                f'<p style="font-size:1.15rem;font-weight:700;margin:0;">{w["hint"]}</p>'
+                '</div>',
+                unsafe_allow_html=True,
+            )
+            st.markdown('<p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;'
+                        'color:#888;font-weight:700;margin:15px 0 6px 0;">Which spelling is correct?</p>',
+                        unsafe_allow_html=True)
+
+        for opt in options:
+            if st.button(opt, use_container_width=True, key=f"mcopt_{w['word']}_{opt}"):
+                st.session_state.attempt = opt
+                submit_attempt()
+                st.rerun()
+
+    elif st.session_state.feedback == "correct":
+        st.success(f"✓ **Nailed it.**  +{10 + (st.session_state.streak - 1) * 2} XP  ·  {st.session_state.streak}× streak")
+        if mode == "spot_spelling":
+            st.markdown('<p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;'
+                        'color:#888;font-weight:700;margin-bottom:0;">Phonetic shape</p>', unsafe_allow_html=True)
+            st.markdown(render_phonetic_html(w["word"]), unsafe_allow_html=True)
+        else:
+            st.info(f"**{w['word']}** — {w['hint']}")
+        c1, c2 = st.columns(2)
+        with c1:
+            if st.button("🏠 Home", use_container_width=True, key="mc_home_correct"):
+                st.session_state.screen = "home"
+                st.session_state.feedback = None
+                st.rerun()
+        with c2:
+            if st.button("Next word →", use_container_width=True, type="primary", key="mc_next_correct"):
+                start_round()
+                st.rerun()
+
+    elif st.session_state.feedback == "wrong":
+        st.error(f'✗ **Not quite.**  You picked: "{st.session_state.attempt}"')
+        if mode == "meaning_check":
+            st.success(f"**{w['word']}** actually means: {w['hint']}")
+        else:
+            st.markdown('<p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;'
+                        'color:#888;font-weight:700;margin:15px 0 0 0;text-align:center;">Correct spelling</p>',
+                        unsafe_allow_html=True)
+            st.markdown(render_phonetic_html(w["word"]), unsafe_allow_html=True)
+        st.warning(f"💡 **Remember:** {w['mnemonic']}")
+        tts_component(w["word"], label="🔊 Hear it again", rate=0.85, key=f"retry_mc_{w['word']}")
+        c1, c2 = st.columns(2)
+        with c1:
+            if st.button("↺ Try again", use_container_width=True, key="mc_retry_wrong"):
+                st.session_state.feedback = None
+                st.session_state.error_info = None
+                st.session_state.attempt = ""
+                st.rerun()
+        with c2:
+            if st.button("Skip →", use_container_width=True, type="primary", key="mc_skip_wrong"):
+                start_round()
+                st.rerun()
 
 # ==============================================================================
 # SCREEN: PLAY
@@ -530,23 +799,17 @@ def screen_play():
             st.session_state.feedback = None
             st.rerun()
     with c2:
-        # Category badge
-        cat = None
-        for category, diffs in WORD_BANK.items():
-            for diff, words in diffs.items():
-                if any(x["word"] == w["word"] for x in words):
-                    cat = category
-                    break
-        badge_colors = {
-            "everyday": ("#e0f2fe", "#0369a1"),
-            "professional": ("#f3e8ff", "#7e22ce"),
-            "trending": ("#fce7f3", "#be185d"),
-        }
-        bg, fg = badge_colors.get(cat, ("#eee", "#555"))
+        # Tag badges — a word can carry more than one tag now (e.g. "privilege" is
+        # both professional and cyber), so show all of them, not just one.
+        tag_badges = ''.join(
+            f'<span style="background:{TAG_COLORS.get(t, ("#eee","#555"))[0]};'
+            f'color:{TAG_COLORS.get(t, ("#eee","#555"))[1]};padding:5px 12px;border-radius:999px;'
+            f'font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-left:4px;">{t}</span>'
+            for t in w["tags"]
+        )
         st.markdown(
             f'<div style="text-align:right;">'
-            f'<span style="background:{bg};color:{fg};padding:5px 12px;border-radius:999px;'
-            f'font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">{cat or "?"}</span>'
+            f'{tag_badges}'
             f'<span style="background:#f3f4f6;color:#555;padding:5px 12px;border-radius:999px;'
             f'font-size:0.75rem;font-weight:700;margin-left:6px;">{len(w["word"])} letters</span>'
             f'</div>',
@@ -554,6 +817,10 @@ def screen_play():
         )
 
     st.markdown("")  # spacer
+
+    if st.session_state.game_mode in ("meaning_check", "spot_spelling"):
+        screen_play_mc(w)
+        return
 
     # MODE: Flash & Recall (orthographic)
     if st.session_state.game_mode == "orthographic" and st.session_state.feedback is None:
@@ -738,6 +1005,24 @@ def screen_stats():
                 f'<div style="height:6px;background:#f3f4f6;border-radius:999px;overflow:hidden;">'
                 f'<div style="height:100%;width:{pct}%;background:#0D8F7F;"></div>'
                 f'</div></div>',
+                unsafe_allow_html=True,
+            )
+
+    # Trouble Words — words you've missed that you haven't since gotten right
+    trouble_counts = {}
+    for e in st.session_state.error_history:
+        if e["word"] not in st.session_state.mastered:
+            trouble_counts[e["word"]] = trouble_counts.get(e["word"], 0) + 1
+    if trouble_counts:
+        st.markdown("### Your trouble words")
+        st.caption("Missed at least once and not yet spelled correctly since. Keep drilling these until they drop off this list.")
+        for word, count in sorted(trouble_counts.items(), key=lambda x: -x[1])[:12]:
+            st.markdown(
+                f'<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;'
+                f'padding:8px 14px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;">'
+                f'<span style="font-weight:700;">{word}</span>'
+                f'<span style="color:#c2410c;font-size:0.8rem;">missed {count}×</span>'
+                f'</div>',
                 unsafe_allow_html=True,
             )
 
