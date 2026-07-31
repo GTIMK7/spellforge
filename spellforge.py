@@ -53,6 +53,17 @@ TAG_COLORS = {
     "trending": ("#fce7f3", "#be185d"),
 }
 
+def theme_colors():
+    """Small set of theme-aware colors, read fresh on every render. Cards that use
+    a hardcoded light background (white/cream) need to switch to a dark card color
+    in dark mode too — flipping only the page background would leave light-mode
+    text illegible against a page background that no longer matches."""
+    if st.session_state.get("dark_mode", False):
+        return {"bg": "#0f1216", "card_bg": "#171b21", "text": "#e6e9ee",
+                "text_dim": "#9aa4b2", "border": "#2a2f38"}
+    return {"bg": "#fafaf7", "card_bg": "#ffffff", "text": "#1a1a1a",
+            "text_dim": "#888", "border": "#e5e5e5"}
+
 # ==============================================================================
 # WORD BANK
 # Flat list — each word has a "difficulty" and a "tags" list (one or more).
@@ -126,16 +137,16 @@ WORD_BANK = [
     {"word": "itinerary", "difficulty": "hard", "tags": ["professional"], "syllables": ["i", "tin", "er", "ar", "y"], "hint": "a travel plan", "mnemonic": "I + TIN + ER + ARY — five parts, like five stops", "common_error": "itenerary"},
     {"word": "discrepancy", "difficulty": "hard", "tags": ["professional", "mpd"], "syllables": ["dis", "crep", "an", "cy"], "hint": "a difference between things that should match", "mnemonic": "DIS + CREP + AN + CY", "common_error": "discrepency"},
     {"word": "comprehensive", "difficulty": "hard", "tags": ["professional"], "syllables": ["com", "pre", "hen", "sive"], "hint": "complete, covering everything", "mnemonic": "COM + PRE + HEN + SIVE", "common_error": "comprehensiv"},
-    {"word": "affect", "difficulty": "easy", "tags": ["confused"], "syllables": ["af", "fect"], "hint": "verb: to influence or change something", "mnemonic": "Affect is Action — both start with A", "common_error": "effect"},
-    {"word": "effect", "difficulty": "easy", "tags": ["confused"], "syllables": ["ef", "fect"], "hint": "noun: a result or consequence", "mnemonic": "Effect is the End result — both start with E", "common_error": "affect"},
-    {"word": "than", "difficulty": "easy", "tags": ["confused"], "syllables": ["than"], "hint": "used to compare two things", "mnemonic": "thAn is for compArisons — same A", "common_error": "then"},
-    {"word": "then", "difficulty": "easy", "tags": ["confused"], "syllables": ["then"], "hint": "refers to time, what happens next", "mnemonic": "thEn tells whEn something happens", "common_error": "than"},
-    {"word": "accept", "difficulty": "easy", "tags": ["confused"], "syllables": ["ac", "cept"], "hint": "verb: to agree to receive or take something", "mnemonic": "ACCept — you take it in", "common_error": "except"},
-    {"word": "except", "difficulty": "easy", "tags": ["confused"], "syllables": ["ex", "cept"], "hint": "preposition: excluding, other than", "mnemonic": "EXcept EXcludes something", "common_error": "accept"},
-    {"word": "your", "difficulty": "easy", "tags": ["confused"], "syllables": ["your"], "hint": "belonging to you", "mnemonic": "YOUR shows ownership, no apostrophe", "common_error": "you're"},
-    {"word": "you're", "difficulty": "easy", "tags": ["confused"], "syllables": ["you're"], "hint": "contraction meaning 'you are'", "mnemonic": "the apostrophe stands in for the A in 'you ARE'", "common_error": "your"},
-    {"word": "its", "difficulty": "easy", "tags": ["confused"], "syllables": ["its"], "hint": "belonging to it — no apostrophe", "mnemonic": "ITS is possessive, like HIS or HERS", "common_error": "it's"},
-    {"word": "it's", "difficulty": "easy", "tags": ["confused"], "syllables": ["it's"], "hint": "contraction meaning 'it is' or 'it has'", "mnemonic": "the apostrophe stands in for the I in 'it IS'", "common_error": "its"},
+    {"word": "affect", "difficulty": "medium", "tags": ["confused"], "syllables": ["af", "fect"], "hint": "verb: to influence or change something", "mnemonic": "Affect is Action — both start with A", "common_error": "effect"},
+    {"word": "effect", "difficulty": "medium", "tags": ["confused"], "syllables": ["ef", "fect"], "hint": "noun: a result or consequence", "mnemonic": "Effect is the End result — both start with E", "common_error": "affect"},
+    {"word": "than", "difficulty": "medium", "tags": ["confused"], "syllables": ["than"], "hint": "used to compare two things", "mnemonic": "thAn is for compArisons — same A", "common_error": "then"},
+    {"word": "then", "difficulty": "medium", "tags": ["confused"], "syllables": ["then"], "hint": "refers to time, what happens next", "mnemonic": "thEn tells whEn something happens", "common_error": "than"},
+    {"word": "accept", "difficulty": "medium", "tags": ["confused"], "syllables": ["ac", "cept"], "hint": "verb: to agree to receive or take something", "mnemonic": "ACCept — you take it in", "common_error": "except"},
+    {"word": "except", "difficulty": "medium", "tags": ["confused"], "syllables": ["ex", "cept"], "hint": "preposition: excluding, other than", "mnemonic": "EXcept EXcludes something", "common_error": "accept"},
+    {"word": "your", "difficulty": "medium", "tags": ["confused"], "syllables": ["your"], "hint": "belonging to you", "mnemonic": "YOUR shows ownership, no apostrophe", "common_error": "you're"},
+    {"word": "you're", "difficulty": "medium", "tags": ["confused"], "syllables": ["you're"], "hint": "contraction meaning 'you are'", "mnemonic": "the apostrophe stands in for the A in 'you ARE'", "common_error": "your"},
+    {"word": "its", "difficulty": "medium", "tags": ["confused"], "syllables": ["its"], "hint": "belonging to it — no apostrophe", "mnemonic": "ITS is possessive, like HIS or HERS", "common_error": "it's"},
+    {"word": "it's", "difficulty": "medium", "tags": ["confused"], "syllables": ["it's"], "hint": "contraction meaning 'it is' or 'it has'", "mnemonic": "the apostrophe stands in for the I in 'it IS'", "common_error": "its"},
     {"word": "complement", "difficulty": "medium", "tags": ["confused"], "syllables": ["com", "ple", "ment"], "hint": "something that completes or pairs well with another", "mnemonic": "compleMENT — it compleTES the set", "common_error": "compliment"},
     {"word": "compliment", "difficulty": "medium", "tags": ["confused"], "syllables": ["com", "pli", "ment"], "hint": "a nice remark that praises someone", "mnemonic": "complIment — I like getting compliments", "common_error": "complement"},
     {"word": "principal", "difficulty": "medium", "tags": ["confused"], "syllables": ["prin", "ci", "pal"], "hint": "the person in charge, or most important", "mnemonic": "the principAL is your PAL", "common_error": "principle"},
@@ -191,6 +202,53 @@ WORD_BANK = [
     {"word": "exploitation", "difficulty": "medium", "tags": ["cyber"], "syllables": ["ex", "ploi", "ta", "tion"], "hint": "taking advantage of a vulnerability", "mnemonic": "EX + PLOIT + ATION", "common_error": "exploitaton"},
     {"word": "obfuscation", "difficulty": "hard", "tags": ["cyber"], "syllables": ["ob", "fus", "ca", "tion"], "hint": "deliberately making something unclear or hard to understand", "mnemonic": "OB + FUS + CATION — a FOG (fus) of confusion", "common_error": "obsfucation"},
     {"word": "exfiltration", "difficulty": "hard", "tags": ["cyber"], "syllables": ["ex", "fil", "tra", "tion"], "hint": "stealing and moving data out of a system", "mnemonic": "EX + FIL + TRA + TION — EXits with the FILes", "common_error": "exfiltraton"},
+
+    # --- Silent Letter Families ---
+    # These teach a transferable pattern (e.g. every "kn-" word has a silent K),
+    # not just one word in isolation. "silent_letter" groups them for the
+    # Silent Letter Families screen and for pattern-aware wrong-answer feedback.
+    {"word": "knife", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "k", "syllables": ["knife"], "hint": "a tool with a sharp blade for cutting", "mnemonic": "Silent K family — the K used to be pronounced, same pattern as 'know'", "common_error": "nife"},
+    {"word": "know", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "k", "syllables": ["know"], "hint": "to have information or understanding about something", "mnemonic": "Silent K family — same pattern as 'knife', 'knee', 'knock'", "common_error": "now"},
+    {"word": "knowledge", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "k", "syllables": ["knowl", "edge"], "hint": "information and understanding gained through experience or study", "mnemonic": "Silent K family — same silent K as 'know'", "common_error": "nowledge"},
+    {"word": "kneel", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "k", "syllables": ["kneel"], "hint": "to go down on one or both knees", "mnemonic": "Silent K family — same pattern as 'knee'", "common_error": "neel"},
+    {"word": "knee", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "k", "syllables": ["knee"], "hint": "the joint where the leg bends", "mnemonic": "Silent K family — same pattern as 'kneel'", "common_error": "nee"},
+    {"word": "knock", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "k", "syllables": ["knock"], "hint": "to strike a surface to get attention", "mnemonic": "Silent K family — same pattern as 'knot'", "common_error": "nock"},
+    {"word": "knot", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "k", "syllables": ["knot"], "hint": "a fastening made by tying rope or string", "mnemonic": "Silent K family — same pattern as 'knock'", "common_error": "not"},
+
+    {"word": "debt", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "b", "syllables": ["debt"], "hint": "money that is owed", "mnemonic": "Silent B family — reflects the Latin root 'debitum', same pattern as 'doubt'", "common_error": "det"},
+    {"word": "doubt", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "b", "syllables": ["doubt"], "hint": "a feeling of uncertainty", "mnemonic": "Silent B family — same historical pattern as 'debt'", "common_error": "dout"},
+    {"word": "subtle", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "b", "syllables": ["sub", "tle"], "hint": "not obvious, delicate or precise", "mnemonic": "Silent B family — SUB + TLE, the B is silent", "common_error": "suttle"},
+    {"word": "thumb", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "b", "syllables": ["thumb"], "hint": "the short, thick finger next to the index finger", "mnemonic": "Silent B family — ends in -MB like 'climb' and 'lamb'", "common_error": "thum"},
+    {"word": "lamb", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "b", "syllables": ["lamb"], "hint": "a young sheep", "mnemonic": "Silent B family — ends in -MB like 'thumb' and 'climb'", "common_error": "lam"},
+    {"word": "climb", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "b", "syllables": ["climb"], "hint": "to go up using hands and feet", "mnemonic": "Silent B family — ends in -MB like 'thumb' and 'lamb'", "common_error": "clime"},
+
+    {"word": "psychology", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "p", "syllables": ["psy", "chol", "o", "gy"], "hint": "the scientific study of the mind and behavior", "mnemonic": "Silent P family — Greek 'ps-' start, like 'psychiatrist'", "common_error": "sychology"},
+    {"word": "psychiatrist", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "p", "syllables": ["psy", "chi", "a", "trist"], "hint": "a doctor who treats mental illness", "mnemonic": "Silent P family — same Greek 'ps-' as 'psychology'", "common_error": "sychiatrist"},
+    {"word": "pneumonia", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "p", "syllables": ["pneu", "mo", "nia"], "hint": "a lung infection", "mnemonic": "Silent P family — Greek 'pn-' start", "common_error": "neumonia"},
+    {"word": "receipt", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "p", "syllables": ["re", "ceipt"], "hint": "a printed record proving a purchase was made", "mnemonic": "Silent P family — related to 'receive' and 'reception', which explains the silent P", "common_error": "reciept"},
+
+    {"word": "write", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "w", "syllables": ["write"], "hint": "to form letters or words on a surface", "mnemonic": "Silent W family — WR- start, like 'wrist' and 'wrong'", "common_error": "rite"},
+    {"word": "wrist", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "w", "syllables": ["wrist"], "hint": "the joint connecting the hand and arm", "mnemonic": "Silent W family — same WR- as 'write'", "common_error": "rist"},
+    {"word": "wreck", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "w", "syllables": ["wreck"], "hint": "to destroy, or the remains of something destroyed", "mnemonic": "Silent W family — same WR- as 'wrap'", "common_error": "reck"},
+    {"word": "wrong", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "w", "syllables": ["wrong"], "hint": "incorrect or not true", "mnemonic": "Silent W family — same WR- as 'write'", "common_error": "rong"},
+    {"word": "wrap", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "w", "syllables": ["wrap"], "hint": "to cover something by folding material around it", "mnemonic": "Silent W family — same WR- as 'wreck'", "common_error": "rap"},
+
+    {"word": "sign", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "g", "syllables": ["sign"], "hint": "a symbol or notice conveying information", "mnemonic": "Silent G family — -GN ending, like 'design' and 'foreign'", "common_error": "sine"},
+    {"word": "design", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "g", "syllables": ["de", "sign"], "hint": "a plan or drawing showing how something will look or work", "mnemonic": "Silent G family — same -GN as 'sign'", "common_error": "desine"},
+    {"word": "foreign", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "g", "syllables": ["for", "eign"], "hint": "from a country other than one's own", "mnemonic": "Silent G family — same -GN as 'campaign'", "common_error": "foriegn"},
+    {"word": "campaign", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "g", "syllables": ["cam", "paign"], "hint": "an organized effort to achieve a goal", "mnemonic": "Silent G family — same -GN as 'foreign'", "common_error": "campain"},
+
+    {"word": "castle", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "t", "syllables": ["cas", "tle"], "hint": "a large fortified building", "mnemonic": "Silent T family — -STLE ending, like 'whistle'", "common_error": "cassle"},
+    {"word": "whistle", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "t", "syllables": ["whis", "tle"], "hint": "a device that makes a high-pitched sound when blown", "mnemonic": "Silent T family — same -STLE as 'castle'", "common_error": "whissle"},
+    {"word": "listen", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "t", "syllables": ["lis", "ten"], "hint": "to give attention to sound", "mnemonic": "Silent T family — same -STEN pattern as 'fasten'", "common_error": "lissen"},
+    {"word": "fasten", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "t", "syllables": ["fas", "ten"], "hint": "to attach or secure something firmly", "mnemonic": "Silent T family — same -STEN pattern as 'listen'", "common_error": "fassen"},
+
+    {"word": "honest", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "h", "syllables": ["hon", "est"], "hint": "truthful and sincere", "mnemonic": "Silent H family — same silent H as 'hour'", "common_error": "onest"},
+    {"word": "hour", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "h", "syllables": ["hour"], "hint": "a period of 60 minutes", "mnemonic": "Silent H family — same silent H as 'honest'", "common_error": "our"},
+
+    {"word": "island", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "s", "syllables": ["is", "land"], "hint": "land completely surrounded by water", "mnemonic": "Silent S family — the S was added historically and is never pronounced", "common_error": "iland"},
+    {"word": "autumn", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "n", "syllables": ["au", "tumn"], "hint": "the season between summer and winter", "mnemonic": "Silent N family — the final N is never pronounced", "common_error": "autum"},
+    {"word": "salmon", "difficulty": "medium", "tags": ["everyday"], "silent_letter": "l", "syllables": ["salm", "on"], "hint": "a pink-fleshed fish", "mnemonic": "Silent L family — the L is never pronounced", "common_error": "samon"},
 ]
 
 # ==============================================================================
@@ -306,6 +364,7 @@ def pick_spelling_options(target):
 
 def render_phonetic_html(word, accent="#0D8F7F"):
     """Return HTML where vowels are colored/underlined, consonants are plain."""
+    t = theme_colors()
     chunks = []
     for ch in word:
         if ch in VOWELS:
@@ -313,11 +372,11 @@ def render_phonetic_html(word, accent="#0D8F7F"):
                 f'<span style="color:{accent};font-weight:800;border-bottom:3px solid {accent};padding-bottom:2px;">{ch}</span>'
             )
         else:
-            chunks.append(f'<span style="color:#1a1a1a;font-weight:700;">{ch}</span>')
+            chunks.append(f'<span style="color:{t["text"]};font-weight:700;">{ch}</span>')
     return (
         f'<div style="font-size:2.4rem;letter-spacing:0.05em;text-align:center;'
         f'font-family:Georgia,serif;margin:0.5rem 0 0.3rem 0;">{"".join(chunks)}</div>'
-        f'<div style="font-size:0.7rem;text-align:center;color:#888;letter-spacing:0.1em;'
+        f'<div style="font-size:0.7rem;text-align:center;color:{t["text_dim"]};letter-spacing:0.1em;'
         f'text-transform:uppercase;">vowels underlined · consonants plain</div>'
     )
 
@@ -423,6 +482,7 @@ def init_state():
         "session_seen": set(),
         "recent_errors": [],  # list of recently-missed words for spaced repetition
         "mc_options": None,  # choices for meaning_check / spot_spelling modes
+        "dark_mode": False,
     }
     for k, v in defaults.items():
         if k not in st.session_state:
@@ -456,8 +516,11 @@ def pick_new_word():
 def start_round():
     w = pick_new_word()
     if w is None:
+        # Don't call st.warning() here — the caller runs st.rerun() right after
+        # this returns, which would wipe any message rendered inline before the
+        # browser ever paints it. screen_home() shows its own warning instead,
+        # driven live off bank_size, whenever the pool is empty.
         st.session_state.screen = "home"
-        st.warning("No words match your filters. Pick at least one category and difficulty.")
         return
     st.session_state.current_word = w
     st.session_state.attempt = ""
@@ -535,53 +598,92 @@ def submit_attempt():
             apply_wrong_result(w, typed_spelling=guess)
 
 # ==============================================================================
+# PROGRESS BACKUP — no backend, so this is the real persistence mechanism.
+# Streamlit session state resets when the tab fully closes; export/import lets
+# progress survive that, across devices, or across browsers.
+# ==============================================================================
+
+PERSISTABLE_KEYS = [
+    "streak", "best_streak", "xp", "total_correct", "total_attempts",
+    "error_history", "recent_errors", "categories", "difficulties", "dark_mode",
+]
+
+def export_progress_dict():
+    data = {k: st.session_state[k] for k in PERSISTABLE_KEYS}
+    data["mastered"] = sorted(st.session_state.mastered)
+    return data
+
+def import_progress_dict(data):
+    for k in PERSISTABLE_KEYS:
+        if k in data:
+            st.session_state[k] = data[k]
+    if "mastered" in data:
+        st.session_state.mastered = set(data["mastered"])
+
+# ==============================================================================
 # UI — GLOBAL STYLES
 # ==============================================================================
 
-st.markdown("""
-<style>
-  .stApp { background: #fafaf7; }
-  .block-container { padding-top: 1.5rem; padding-bottom: 3rem; max-width: 640px; }
-  /* Bigger, more tappable input for mobile */
-  .stTextInput input {
-    font-size: 1.3rem !important;
-    font-weight: 700 !important;
-    text-align: center !important;
-    padding: 14px !important;
-    border-radius: 14px !important;
-    letter-spacing: 0.05em !important;
-  }
-  /* Tappable buttons */
-  .stButton button {
-    font-weight: 700 !important;
-    border-radius: 12px !important;
-    padding: 10px 18px !important;
-    font-size: 0.95rem !important;
-  }
-  /* Hide Streamlit footer/menu for cleaner app feel */
-  #MainMenu { visibility: hidden; }
-  footer { visibility: hidden; }
-  header { visibility: hidden; }
-  /* Level/streak chips */
-  .chip {
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    margin-right: 6px;
-  }
-  .chip-streak { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
-  .chip-level { background: #ecfdf5; color: #0D8F7F; border: 1px solid #a7f3d0; }
-  h1.logo {
-    font-family: Georgia, serif;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    margin: 0;
-    color: #1a1a1a;
-  }
-</style>
-""", unsafe_allow_html=True)
+def render_global_css():
+    t = theme_colors()
+    st.markdown(f"""
+    <style>
+      .stApp {{ background: {t['bg']}; }}
+      .block-container {{ padding-top: 1.5rem; padding-bottom: 3rem; max-width: 640px; }}
+      /* Make Streamlit's own text (markdown, captions, labels) follow the theme */
+      .stApp, .stMarkdown, p, span, label, [data-testid="stCaptionContainer"] {{ color: {t['text']}; }}
+      [data-testid="stCaptionContainer"] {{ color: {t['text_dim']} !important; }}
+      /* Bigger, more tappable input for mobile */
+      .stTextInput input {{
+        font-size: 1.3rem !important;
+        font-weight: 700 !important;
+        text-align: center !important;
+        padding: 14px !important;
+        border-radius: 14px !important;
+        letter-spacing: 0.05em !important;
+        background: {t['card_bg']} !important;
+        color: {t['text']} !important;
+        border-color: {t['border']} !important;
+      }}
+      /* Tappable buttons */
+      .stButton button {{
+        font-weight: 700 !important;
+        border-radius: 12px !important;
+        padding: 10px 18px !important;
+        font-size: 0.95rem !important;
+      }}
+      /* Secondary (non-primary) buttons need theme-aware background/border too */
+      .stButton button[kind="secondary"] {{
+        background: {t['card_bg']} !important;
+        color: {t['text']} !important;
+        border-color: {t['border']} !important;
+      }}
+      /* Hide Streamlit footer/menu for cleaner app feel */
+      #MainMenu {{ visibility: hidden; }}
+      footer {{ visibility: hidden; }}
+      header {{ visibility: hidden; }}
+      /* Level/streak chips */
+      .chip {{
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        margin-right: 6px;
+      }}
+      .chip-streak {{ background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }}
+      .chip-level {{ background: #ecfdf5; color: #0D8F7F; border: 1px solid #a7f3d0; }}
+      h1.logo {{
+        font-family: Georgia, serif;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        margin: 0;
+        color: {t['text']};
+      }}
+    </style>
+    """, unsafe_allow_html=True)
+
+render_global_css()
 
 # ==============================================================================
 # SCREEN: HOME
@@ -621,6 +723,10 @@ def screen_home():
             f'</div>',
             unsafe_allow_html=True,
         )
+        if st.button("🌙 Dark" if not st.session_state.dark_mode else "☀️ Light",
+                     key="dark_toggle", use_container_width=True):
+            st.session_state.dark_mode = not st.session_state.dark_mode
+            st.rerun()
 
     st.markdown("---")
 
@@ -643,6 +749,8 @@ def screen_home():
     diffs = st.session_state.difficulties
     bank_size = len(get_filtered_bank(cats, diffs))
     st.caption(f"Pool size: {bank_size} words  ·  Mastered: {len(st.session_state.mastered)}")
+    if bank_size == 0:
+        st.warning("No words match your filters. Pick at least one category and difficulty above before starting a drill.")
 
     # Progress bar
     xp_in_level = st.session_state.xp % 100
@@ -678,6 +786,12 @@ def screen_home():
         start_round()
         st.rerun()
 
+    # Silent Letter Families
+    if st.button("🔇  Silent Letter Families  —  Learn the patterns behind knife, debt, psychology, and more",
+                 use_container_width=True):
+        st.session_state.screen = "silent"
+        st.rerun()
+
     # Stats view
     if st.button("📊  My Error Patterns  —  See your personal mistakes: dropped letters, swaps, substitutions",
                  use_container_width=True):
@@ -703,34 +817,45 @@ def screen_play_mc(w):
 
     if st.session_state.feedback is None:
         if mode == "meaning_check":
+            # NOTE: the whole styled box must be built in ONE st.markdown call.
+            # Streamlit renders each st.markdown()/components.html() call as its
+            # own isolated block — opening a <div> in one call and closing it in
+            # a later call does NOT nest them; the browser just auto-closes the
+            # first (empty) div immediately, and later content renders outside
+            # it, invisible-looking. This was a real bug, now fixed.
             st.markdown(
-                '<div style="background:linear-gradient(135deg,#0D8F7F08,#0D8F7F18);'
-                'border:1px solid #0D8F7F25;border-radius:20px;padding:25px 15px;text-align:center;">',
+                f'<div style="background:linear-gradient(135deg,#0D8F7F08,#0D8F7F18);'
+                f'border:1px solid #0D8F7F25;border-radius:20px;padding:25px 15px;text-align:center;">'
+                f'<div style="font-size:2rem;font-weight:800;font-family:Georgia,serif;color:{theme_colors()["text"]};">{w["word"]}</div>'
+                f'</div>',
                 unsafe_allow_html=True,
             )
             tts_component(w["word"], label="🔊 Hear the word", rate=1.0, key=f"tts_mc_{w['word']}")
-            st.markdown(
-                f'<div style="font-size:2rem;font-weight:800;font-family:Georgia,serif;'
-                f'text-align:center;margin:10px 0 0 0;">{w["word"]}</div>',
-                unsafe_allow_html=True,
-            )
-            st.markdown("</div>", unsafe_allow_html=True)
             st.markdown('<p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;'
                         'color:#888;font-weight:700;margin:15px 0 6px 0;">What does this mean?</p>',
                         unsafe_allow_html=True)
         else:  # spot_spelling
             st.markdown(
-                '<div style="background:linear-gradient(135deg,#0D8F7F08,#0D8F7F18);'
-                'border:1px solid #0D8F7F25;border-radius:20px;padding:20px 15px;text-align:center;">'
-                '<p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#888;'
+                f'<div style="background:linear-gradient(135deg,#0D8F7F08,#0D8F7F18);'
+                f'border:1px solid #0D8F7F25;border-radius:20px;padding:20px 15px;text-align:center;">'
+                f'<p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#888;'
                 f'font-weight:700;margin-bottom:8px;">This word means</p>'
                 f'<p style="font-size:1.15rem;font-weight:700;margin:0;">{w["hint"]}</p>'
-                '</div>',
+                f'</div>',
                 unsafe_allow_html=True,
             )
             st.markdown('<p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;'
                         'color:#888;font-weight:700;margin:15px 0 6px 0;">Which spelling is correct?</p>',
                         unsafe_allow_html=True)
+
+        # Optional "sound it out" hint — syllables + audio, doesn't reveal which
+        # option is correct, just gives phonetic scaffolding on request.
+        if st.button("🗣 Sound it out (hint)", key=f"mc_hint_{w['word']}"):
+            st.session_state.show_hint = not st.session_state.show_hint
+            st.rerun()
+        if st.session_state.show_hint:
+            st.markdown(syllable_pills_html(w["syllables"]), unsafe_allow_html=True)
+            tts_syllables_component(w["syllables"], key=f"mc_syl_{w['word']}")
 
         for opt in options:
             if st.button(opt, use_container_width=True, key=f"mcopt_{w['word']}_{opt}"):
@@ -858,20 +983,19 @@ def screen_play():
     # MODE: Listen & Spell (dictation)
     else:
         if st.session_state.feedback is None:
+            # Whole box built in one st.markdown call — see note in screen_play_mc()
+            # about why splitting an open <div> across separate calls doesn't work.
             st.markdown(
-                '<div style="background:linear-gradient(135deg,#0D8F7F08,#0D8F7F18);'
-                'border:1px solid #0D8F7F25;border-radius:20px;padding:20px 15px;text-align:center;">',
+                f'<div style="background:linear-gradient(135deg,#0D8F7F08,#0D8F7F18);'
+                f'border:1px solid #0D8F7F25;border-radius:20px;padding:20px 15px;text-align:center;">'
+                f'<p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;'
+                f'color:#888;font-weight:700;margin:0 0 6px 0;">Sound it out</p>'
+                f'{syllable_pills_html(w["syllables"])}'
+                f'</div>',
                 unsafe_allow_html=True,
             )
             tts_component(w["word"], label="🔊 Hear the word", rate=1.0, key=f"tts_{w['word']}")
-            st.markdown(
-                '<p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;'
-                'color:#888;font-weight:700;margin:12px 0 6px 0;">Sound it out</p>',
-                unsafe_allow_html=True,
-            )
-            st.markdown(syllable_pills_html(w["syllables"]), unsafe_allow_html=True)
             tts_syllables_component(w["syllables"], key=f"syl_{w['word']}")
-            st.markdown("</div>", unsafe_allow_html=True)
 
     # Input
     st.markdown("")
@@ -932,6 +1056,17 @@ def screen_play():
                     unsafe_allow_html=True)
         st.markdown(render_phonetic_html(w["word"]), unsafe_allow_html=True)
         st.warning(f"💡 **Remember:** {w['mnemonic']}")
+
+        # Pattern-aware feedback: if the miss was dropping the word's known
+        # silent letter, name the pattern and show sibling words instead of
+        # treating it as a one-off mistake.
+        err = st.session_state.error_info
+        silent = w.get("silent_letter")
+        if err and silent and err.get("type") == "missing_letter" and err.get("letter") == silent:
+            siblings = [s["word"] for s in silent_letter_families().get(silent, []) if s["word"] != w["word"]][:4]
+            st.info(f"🔍 **Pattern detected:** this is the **Silent {silent.upper()}** family — "
+                    f"not a one-off, it shows up in {', '.join(siblings)} too.")
+
         # Hear it again
         tts_component(w["word"], label="🔊 Hear it again", rate=0.85, key=f"retry_{w['word']}")
         c1, c2 = st.columns(2)
@@ -947,10 +1082,68 @@ def screen_play():
                 st.rerun()
 
 # ==============================================================================
+# SCREEN: SILENT LETTER FAMILIES
+# ==============================================================================
+
+def silent_letter_families():
+    """Group words by their silent letter — the point is pattern recognition
+    (every 'kn-' word has a silent K), not memorizing each word in isolation."""
+    families = {}
+    for w in WORD_BANK:
+        letter = w.get("silent_letter")
+        if letter:
+            families.setdefault(letter, []).append(w)
+    return families
+
+def start_silent_family_practice(letter, words):
+    """Lightweight alternative to start_round() — draws from this specific
+    family's word list instead of the category/difficulty-filtered bank."""
+    w = random.choice(words)
+    st.session_state.game_mode = "dictation"
+    st.session_state.current_word = w
+    st.session_state.attempt = ""
+    st.session_state.feedback = None
+    st.session_state.error_info = None
+    st.session_state.show_hint = False
+    st.session_state.mc_options = None
+    st.session_state.session_seen.add(w["word"])
+    st.session_state.screen = "play"
+
+def screen_silent_families():
+    t = theme_colors()
+    c1, c2 = st.columns([1, 3])
+    with c1:
+        if st.button("← Back", use_container_width=True):
+            st.session_state.screen = "home"
+            st.rerun()
+    with c2:
+        st.markdown('<h2 style="text-align:center;font-family:Georgia,serif;margin:0;">Silent Letter Families</h2>',
+                    unsafe_allow_html=True)
+    st.caption("Silent letters aren't random — they follow patterns. Learn the family, and you can spell words in it you've never seen before.")
+    st.markdown("---")
+
+    families = silent_letter_families()
+    for letter in sorted(families.keys()):
+        words = families[letter]
+        st.markdown(
+            f'<div style="background:{t["card_bg"]};border:1px solid {t["border"]};border-radius:12px;'
+            f'padding:14px 16px;margin-bottom:10px;">'
+            f'<div style="font-weight:800;font-size:1.1rem;color:{t["text"]};margin-bottom:6px;">'
+            f'Silent {letter.upper()} <span style="font-weight:400;color:{t["text_dim"]};font-size:0.85rem;">({len(words)} words)</span></div>'
+            f'<div style="color:{t["text_dim"]};">{", ".join(w["word"] for w in words)}</div>'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
+        if st.button(f"Practice Silent {letter.upper()} →", key=f"practice_silent_{letter}", use_container_width=True):
+            start_silent_family_practice(letter, words)
+            st.rerun()
+
+# ==============================================================================
 # SCREEN: STATS
 # ==============================================================================
 
 def screen_stats():
+    t = theme_colors()
     c1, c2, c3 = st.columns([1, 2, 1])
     with c1:
         if st.button("← Back", use_container_width=True):
@@ -996,13 +1189,13 @@ def screen_stats():
         for err_type, count in sorted_errors:
             pct = round(100 * count / total)
             st.markdown(
-                f'<div style="background:white;border:1px solid #e5e5e5;border-radius:12px;'
+                f'<div style="background:{t["card_bg"]};border:1px solid {t["border"]};border-radius:12px;'
                 f'padding:12px 16px;margin-bottom:8px;">'
                 f'<div style="display:flex;justify-content:space-between;margin-bottom:6px;">'
-                f'<span style="font-weight:700;">{error_labels.get(err_type, err_type)}</span>'
-                f'<span style="color:#888;font-family:monospace;">{count}× · {pct}%</span>'
+                f'<span style="font-weight:700;color:{t["text"]};">{error_labels.get(err_type, err_type)}</span>'
+                f'<span style="color:{t["text_dim"]};font-family:monospace;">{count}× · {pct}%</span>'
                 f'</div>'
-                f'<div style="height:6px;background:#f3f4f6;border-radius:999px;overflow:hidden;">'
+                f'<div style="height:6px;background:{t["border"]};border-radius:999px;overflow:hidden;">'
                 f'<div style="height:100%;width:{pct}%;background:#0D8F7F;"></div>'
                 f'</div></div>',
                 unsafe_allow_html=True,
@@ -1020,7 +1213,7 @@ def screen_stats():
             st.markdown(
                 f'<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;'
                 f'padding:8px 14px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;">'
-                f'<span style="font-weight:700;">{word}</span>'
+                f'<span style="font-weight:700;color:#7c2d12;">{word}</span>'
                 f'<span style="color:#c2410c;font-size:0.8rem;">missed {count}×</span>'
                 f'</div>',
                 unsafe_allow_html=True,
@@ -1031,14 +1224,38 @@ def screen_stats():
         st.markdown("### Recent misses")
         for e in list(reversed(st.session_state.error_history))[:8]:
             st.markdown(
-                f'<div style="background:#fafaf7;border-radius:8px;padding:10px 14px;margin-bottom:6px;'
+                f'<div style="background:{t["card_bg"]};border:1px solid {t["border"]};border-radius:8px;padding:10px 14px;margin-bottom:6px;'
                 f'display:flex;justify-content:space-between;align-items:center;">'
                 f'<span style="font-family:monospace;color:#dc2626;text-decoration:line-through;">{e["attempt"]}</span>'
-                f'<span style="color:#ccc;">→</span>'
-                f'<span style="font-family:monospace;color:#1a1a1a;font-weight:700;">{e["word"]}</span>'
+                f'<span style="color:{t["text_dim"]};">→</span>'
+                f'<span style="font-family:monospace;color:{t["text"]};font-weight:700;">{e["word"]}</span>'
                 f'</div>',
                 unsafe_allow_html=True,
             )
+
+    st.markdown("---")
+    st.markdown("### Backup your progress")
+    st.caption("Progress lives only in this browser tab. Export it to a file so you don't lose it when the tab closes, or to move it to your phone/another browser.")
+    c1, c2 = st.columns(2)
+    with c1:
+        st.download_button(
+            "⬇ Export progress",
+            data=json.dumps(export_progress_dict(), indent=2),
+            file_name="spellforge_progress.json",
+            mime="application/json",
+            use_container_width=True,
+        )
+    with c2:
+        uploaded = st.file_uploader("Restore from file", type=["json"], label_visibility="collapsed")
+    if uploaded is not None:
+        if st.button("Restore this file", use_container_width=True, type="primary"):
+            try:
+                data = json.loads(uploaded.read())
+                import_progress_dict(data)
+                st.success("Progress restored.")
+                st.rerun()
+            except Exception as e:
+                st.error(f"Could not read that file: {e}")
 
     st.markdown("---")
     if st.button("⚠ Reset all progress", use_container_width=True):
@@ -1057,3 +1274,5 @@ elif st.session_state.screen == "play":
     screen_play()
 elif st.session_state.screen == "stats":
     screen_stats()
+elif st.session_state.screen == "silent":
+    screen_silent_families()
